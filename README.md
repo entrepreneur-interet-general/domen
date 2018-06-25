@@ -3,26 +3,28 @@
 
 ## Importing data
 
-curl -XPUT http://ELASTIC_HOST:9200/colonnes -H'Content-Type: application/json' -d '
+curl -XPUT http://35.229.165.129:9200/colonnes -H'Content-Type: application/json' -d '
 {
- "mappings" : {
-  "_default_" : {
+ "mappings": {
+  "doc": {
    "properties" : {
-    "Colonne ID" : {"type": "string", "index" : "not_analyzed" },
-    "Commentaire" : {"type": "string", "index" : "not_analyzed" },
-    "Data type" : {"type": "string", "index" : "not_analyzed" },
-    "Data type pivot" : {"type": "string", "index" : "not_analyzed" },
-    "Données perso" : {"type": "string", "index" : "not_analyzed" },
-    "FK" : {"type": "string", "index" : "not_analyzed" },
-    "Longueur" : {"type": "string", "index" : "not_analyzed" },
-    "Nom Colonne long" : {"type": "string", "index" : "not_analyzed" },
-    "Nom court" : {"type": "string", "index" : "not_analyzed" },
-    "agr_age_maxi" : {"type": "string", "index" : "not_analyzed" },
-    "Not null" : {"type": "string", "index" : "not_analyzed" },
-    "PK" : {"type": "string", "index" : "not_analyzed" },
-    "Table ID" : {"type": "string", "index" : "not_analyzed" }
+    "colonne_id" : {"type": "text"},
+    "commentaire" : {"type": "text"},
+    "data_type" : {"type": "text"},
+    "data_type_pivot" : {"type": "text"},
+    "donnees_perso" : {"type": "text"},
+    "fk" : {"type": "text"},
+    "longueur" : {"type": "text"},
+    "nom_colonne_long" : {"type": "text"},
+    "nom_court" : {"type": "text"},
+    "agr_age_maxi" : {"type": "text"},
+    "not_null" : {"type": "text"},
+    "pk" : {"type": "text"},
+    "table_id" : {"type": "text"}
    }
   }
  }
 }
 ';
+
+curl -H 'Content-Type: application/x-ndjson' -XPOST 'http://35.229.165.129:9200/colonnes/_bulk?pretty' --data-binary @colonnes_elastic.json

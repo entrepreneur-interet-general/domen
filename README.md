@@ -3,7 +3,8 @@
 
 ## Importing data
 
-curl -XPUT http://35.229.165.129:9200/colonnes -H'Content-Type: application/json' -d '
+```
+curl -XPUT http://ELASTIC_HOST:9200/colonnes -H'Content-Type: application/json' -d '
 {
  "mappings": {
   "doc": {
@@ -26,5 +27,8 @@ curl -XPUT http://35.229.165.129:9200/colonnes -H'Content-Type: application/json
  }
 }
 ';
+```
 
-curl -H 'Content-Type: application/x-ndjson' -XPOST 'http://35.229.165.129:9200/colonnes/_bulk?pretty' --data-binary @colonnes_elastic.json
+```
+curl -H 'Content-Type: application/x-ndjson' -XPOST 'http://ELASTIC_HOST:9200/colonnes/_bulk?pretty' --data-binary @colonnes_elastic.json
+```

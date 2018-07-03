@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'u2jtqb_1w%xoa#nc^0ok3abu%s_(8$t@pom!*!)ewud7)k*m9k'
+SECRET_KEY = '=6r)cdzto*9gq431$n^r5cfg6np06oukk-y$9ide%djp$!w1bl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'haystack',
+    'search'
 ]
 
 MIDDLEWARE = [
@@ -79,6 +82,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+          'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
+          'URL': os.getenv('ELASTIC_HOST'),
+          'INDEX_NAME': 'colonnes',
+    },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 
 # Password validation

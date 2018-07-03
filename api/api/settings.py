@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'haystack'
+    'haystack',
+    'search'
 ]
 
 MIDDLEWARE = [
@@ -84,11 +85,13 @@ DATABASES = {
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': os.getenv('ELASTIC_HOST') + ':9200/',
-        'INDEX_NAME': 'haystack',
+          'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
+          'URL': os.getenv('ELASTIC_HOST'),
+          'INDEX_NAME': 'colonnes',
     },
 }
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 
 # Password validation

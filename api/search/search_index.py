@@ -24,4 +24,4 @@ class LocationIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(
-            created__lte=timezone.now()
+            created__lte=timezone.now())

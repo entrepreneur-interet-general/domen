@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'haystack',
     'search'
 ]
 
@@ -51,6 +50,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
 
 ROOT_URLCONF = 'api.urls'
 
@@ -79,19 +83,9 @@ WSGI_APPLICATION = 'api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, '../databases/data/db.sqlite3'),
     }
 }
-
-HAYSTACK_CONNECTIONS = {
-    'default': {
-          'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
-          'URL': os.getenv('ELASTIC_HOST'),
-          'INDEX_NAME': 'colonnes',
-    },
-}
-
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 
 # Password validation

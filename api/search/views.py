@@ -1,20 +1,18 @@
-from drf_haystack.serializers import HaystackSerializer
-from drf_haystack.viewsets import HaystackViewSet
+from rest_framework import serializers, viewsets
+from rest_framework.pagination import PageNumberPagination
 
-from .models import Location
-from .search_index import LocationIndex
+from .models import Colonne
 
 
-class LocationSerializer(HaystackSerializer):
+class ColonneSerializer(serializers.ModelSerializer):
 
     class Meta:
-        index_classes = [LocationIndex]
-        fields = [
-            "text", "address", "city", "zip_code", "autocomplete"
-        ]
+        model = Colonne
+        fields = '__all__'
 
 
-class LocationSearchView(HaystackViewSet):
+class ColonneViewset(viewsets.ModelViewSet):
 
-    index_models = [Location]
-    serializer_class = LocationSerializer
+    serializer_class = ColonneSerializer
+    queryset = Colonne.objects.all()
+    pagination_class = PageNumberPagination

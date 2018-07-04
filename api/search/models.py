@@ -1,21 +1,18 @@
 from django.db import models
-from haystack.utils.geo import Point
 
 
-class Location(models.Model):
+class Colonne(models.Model):
 
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    address = models.CharField(max_length=100)
-    city = models.CharField(max_length=30)
-    zip_code = models.CharField(max_length=10)
-
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.address
-
-    @property
-    def coordinates(self):
-        return Point(self.longitude, self.latitude)
+    colonne_id = models.CharField(max_length=12)
+    commentaire = models.TextField()
+    data_type = models.CharField(max_length=32)
+    data_type_pivot = models.CharField(max_length=32)
+    donnees_perso = models.TextField()
+    fk = models.CharField(max_length=32)
+    longueur = models.TextField()
+    nom_colonne_long = models.TextField()
+    nom_court = models.TextField()
+#     agr_age_maxi = models.CharField(max_length=32, null=True)
+    not_null = models.TextField()
+    primary_key = models.CharField(max_length=32)
+    table_id = models.TextField()
